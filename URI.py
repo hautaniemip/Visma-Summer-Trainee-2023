@@ -1,4 +1,8 @@
 class URI:
+    """
+    A class that presents a simplified structure of URI
+    """
+
     scheme: str
     path: str
     params: list
