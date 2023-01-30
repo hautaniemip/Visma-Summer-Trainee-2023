@@ -11,7 +11,7 @@ class Parser:
         parses the given URI
     """
 
-    # __ALLOWED_PAHTS contain all paths that the parser supports
+    # __ALLOWED_PAHTS contain all paths that the parser currently supports
     __ALLOWED_PATHS = ["login", "confirm", "sign"]
     @staticmethod
     def parseURI(uri: str) -> URI:
@@ -26,7 +26,7 @@ class Parser:
         Returns
         -------
         URI
-            a parsed URI object
+            a parsed URI object or None if URI is invalid
         """
 
         scheme = Parser.__parseScheme(uri)

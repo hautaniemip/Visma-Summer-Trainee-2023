@@ -1,6 +1,6 @@
 class URI:
     """
-    A class that presents a simplified structure of URI
+    A class that represents a simplified structure of URI
     """
 
     scheme: str
