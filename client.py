@@ -25,8 +25,10 @@ class Client:
         print(f"Path: {parsedURI.getPath()}")
         print("Parameters:")
 
-        for param in parsedURI.getParams():
-            print(f"- {param[0]}: {param[1]}")
+
+        params = parsedURI.getParams()
+        for paramName in params:
+            print(f"- {paramName}: {params[paramName]}")
 
 
 

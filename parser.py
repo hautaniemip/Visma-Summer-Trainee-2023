@@ -76,7 +76,7 @@ class Parser:
     @staticmethod
     def __parseParams(uri: str) -> list:
         start = uri.find("?")
-        params = []
+        params = {}
 
         if start == -1:
             return params
@@ -91,12 +91,14 @@ class Parser:
             if paramName == "paymentnumber":
                 paramValue = int(paramValue)
 
-            params.append((paramName, paramValue))
+            # If there is same parameter multiple times this 
+            # discards every other value except the last one
+            params[paramName] = paramValue
 
         return params
 
     @staticmethod
-    def __validateParams(path: str, params: list) -> bool:
+    def __validateParams(path: str, params: dict) -> bool:
         """
         Validates all parameters by calling the correct validating method based on path
 
@@ -104,7 +106,7 @@ class Parser:
         ---------
         path: str
             a path supported by parser
-        params: list(tuple)
+        params: dict
             a list of tuples for each parameter
 
         Returns
@@ -124,7 +126,7 @@ class Parser:
         return False
 
     @staticmethod
-    def __validateLoginParams(params: list) -> bool:
+    def __validateLoginParams(params: dict) -> bool:
         """
         Checks the amount of parameters and that they are correct for the path
         """
@@ -134,16 +136,15 @@ class Parser:
         if len(params) != 1:
             isValid = False
 
-        for param in params:
-            #param[0] contains the name of the parameter
-            if param[0] != "source":
+        for paramName in params:
+            if paramName != "source":
                 isValid = False
 
         return isValid
 
 
     @staticmethod
-    def __validateConfirmParams(params: list) -> bool:
+    def __validateConfirmParams(params: dict) -> bool:
         """
         Checks the amount of parameters and that they are correct for the path
         """
@@ -153,15 +154,14 @@ class Parser:
         if len(params) != 2:
             isValid = False
 
-        for param in params:
-            #param[0] contains the name of the parameter
-            if param[0] != "source" and param[0] != "paymentnumber":
+        for paramName in params:
+            if paramName != "source" and paramName != "paymentnumber":
                 isValid = False
 
         return isValid
 
     @staticmethod
-    def __validateSignParams(params: list) -> bool:
+    def __validateSignParams(params: dict) -> bool:
         """
         Checks the amount of parameters and that they are correct for the path
         """
@@ -171,9 +171,8 @@ class Parser:
         if len(params) != 2:
             isValid = False
 
-        for param in params:
-            #param[0] contains the name of the parameter
-            if param[0] != "source" and param[0] != "documentid":
+        for paramName in params:
+            if paramName != "source" and paramName != "documentid":
                 isValid = False
 
         return isValid

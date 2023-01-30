@@ -5,9 +5,9 @@ class URI:
 
     scheme: str
     path: str
-    params: list
+    params: dict
 
-    def __init__(self, scheme: str, path: str, params: list):
+    def __init__(self, scheme: str, path: str, params: dict):
         self.scheme = scheme
         self.path = path
         self.params = params
@@ -18,5 +18,5 @@ class URI:
     def getPath(self) -> str:
         return self.path
 
-    def getParams(self) -> list:
+    def getParams(self) -> dict:
         return self.params
